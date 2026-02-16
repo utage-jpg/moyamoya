@@ -114,7 +114,7 @@ const HONNE_TEMPLATES = {
 
 const HINT_TEMPLATES = {
   '安心': [
-    { ng: 'なんで連絡くれないの？', ok: '今ちょっと不安になることがあって、確認させてほしい' },
+    { ng: 'なんで連絡くれないの？', ok: '不安になることがあって、確認させてほしい' },
     { ng: '私のこと気にしてないでしょ', ok: '大丈夫って言ってもらえると、すごく落ち着く' },
   ],
   '共有': [
@@ -143,7 +143,7 @@ const ACTION_TEMPLATES = {
     '小さな「大丈夫」を積み重ねる',
   ],
   '共有': [
-    '10分だけノースマホで話す時間を作る',
+    '10分だけスマホを見ないで話す時間を作る',
     '寝る前に一言ふりかえりを言い合う',
     '今日あった小さな出来事を1つシェアする',
     '週に1回、ふたりでお気に入りの話をする',
@@ -217,7 +217,7 @@ function buildAdvice(topAxes, scores) {
   axes3.forEach((axis, i) => {
     const templates = HINT_TEMPLATES[axis] || HINT_TEMPLATES['共有'];
     const t = templates[i % templates.length];
-    result.push({ axis, ng: t.ng, ok: `今ちょっと…${t.ok}` });
+    result.push({ axis, ng: t.ng, ok: t.ok });
   });
   return result;
 }
@@ -328,8 +328,7 @@ function renderStep1() {
         <div class="category-header">
           <span class="category-emoji" aria-hidden="true">${cat.emoji}</span>
           <div>
-            <div class="category-label">カテゴリ${cat.id}</div>
-            <div class="category-name">${cat.name}</div>
+            <div class="category-label">愛情表現</div>
           </div>
         </div>
         <div class="check-list">${itemsHTML}</div>
@@ -342,7 +341,7 @@ function renderStep1() {
         <div class="app-logo-icon" aria-hidden="true">🌿</div>
         <h1 class="app-title">ふたりのモヤモヤ整理室</h1>
       </div>
-      <p class="app-subtitle">責めるためじゃない。<br>ちゃんと向き合うためのチェック。</p>
+      <p class="app-subtitle">あいてに対して感じていることをすべて選んでください。<br>あなたが感じている「モヤモヤ」をできる限り言語化します</p>
     </header>
     ${renderStepIndicator(1)}
     <div class="selected-count" id="selected-count" aria-live="polite">
