@@ -308,8 +308,6 @@ function renderStepIndicator(step) {
 
 function renderStep1() {
   const app = document.getElementById('app');
-  const history = storageLoad();
-  const historyHTML = history.length > 0 ? buildHistoryHTML(history) : '';
 
   const categoriesHTML = CATEGORIES.map(cat => {
     const itemsHTML = cat.items.map(item => {
@@ -351,7 +349,6 @@ function renderStep1() {
     <button class="btn btn-primary" id="btn-next" aria-label="気持ちを整理する">
       ✦ 整理する
     </button>
-    ${historyHTML}
   `;
 
   document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
@@ -369,38 +366,6 @@ function renderStep1() {
     }
     state.goto(2);
   });
-
-  document.querySelectorAll('.history-item').forEach(el => {
-    el.addEventListener('click', () => {
-      const entry = storageLoad()[Number(el.dataset.idx)];
-      if (!entry) return;
-      state.selected = new Set(entry.selectedIds.map(Number));
-      state.scores   = entry.scores;
-      state.topAxes  = entry.topAxes;
-      state.goto(3);
-    });
-    // キーボード操作
-    el.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') el.click();
-    });
-  });
-}
-
-function buildHistoryHTML(history) {
-  const items = history.map((entry, idx) => {
-    const summary = entry.topAxes.length > 0
-      ? entry.topAxes.join('・') + 'が高め' : '（記録あり）';
-    return `
-      <div class="history-item" role="button" tabindex="0"
-           data-idx="${idx}" aria-label="${entry.date}の記録を表示">
-        <div class="history-item-info">
-          <div class="history-item-date">${entry.date}</div>
-          <div class="history-item-summary">${summary}</div>
-        </div>
-        <div class="history-item-arrow" aria-hidden="true">▸</div>
-      </div>`;
-  }).join('');
-  return `<div class="history-section"><div class="history-title">📂 保存した記録</div>${items}</div>`;
 }
 
 /* ═══════════════════════════════════════════
