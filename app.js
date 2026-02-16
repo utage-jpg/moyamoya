@@ -542,7 +542,6 @@ function renderStep3() {
     </section>
 
     <div class="result-actions">
-      <button class="btn btn-primary" id="btn-save" style="margin:0">💾 結果を保存</button>
       <button class="btn btn-secondary btn-block" id="btn-retry">もう一度やる</button>
       <button class="btn btn-ghost btn-block" id="btn-back-keep">選択を保持して戻る</button>
     </div>
@@ -582,11 +581,6 @@ function renderStep3() {
       document.body.removeChild(ta);
       showToast('コピーしました');
     });
-  });
-
-  document.getElementById('btn-save').addEventListener('click', () => {
-    storageSave(state.selected, state.scores, state.topAxes);
-    showToast('保存しました 📂');
   });
 
   document.getElementById('btn-retry').addEventListener('click', () => {
