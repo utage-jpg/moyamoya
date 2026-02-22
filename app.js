@@ -326,7 +326,7 @@ function renderStep1() {
         <div class="category-header">
           <span class="category-emoji" aria-hidden="true">${cat.emoji}</span>
           <div>
-            <div class="category-label">愛情表現</div>
+            <div class="category-label">${cat.name}</div>
           </div>
         </div>
         <div class="check-list">${itemsHTML}</div>
